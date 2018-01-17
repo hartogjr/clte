@@ -38,7 +38,7 @@ recognizing the following tags:
 This application was create with code generation in mind for software
 projects, generating C++, Slice definitions, SQL and alike. There are already
 various template engines out there. However, I've found that they don't meet
-my needs, because of the following reasons found below.
+my needs, because of the following reasons:
 
 * *Most of them are focussed on web applications* This means they have all
   kinds of "smartness" for escaping HTML, which is only annoying for other
@@ -49,7 +49,6 @@ my needs, because of the following reasons found below.
   languages for a task that is relatively simple and straightforward? It is
   again a clear choice made towards what developers are *familiar* with
   instead of choosing the *right tool for the right job*.
-* *Processing posibilities are too simple* like in Jinja2 or the
-  self-proclaimed "logic-less" Mustache. I want to have ample flexibility to
-  write some code in my templates, not be limited by what the template engine
-  can or can't do.
+* *Processing posibilities are too simple* like in Jinja2 or the logic-less
+  Mustache. I want to have ample flexibility to write some code in my
+  templates, not be limited by what the template engine can or can't do.
