@@ -9,7 +9,12 @@ BISON_TARGET (ClteParser parser.y ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp)
 FLEX_TARGET (ClteScanner scanner.l ${CMAKE_CURRENT_BINARY_DIR}/scanner.cpp)
 ADD_FLEX_BISON_DEPENDENCY (ClteScanner ClteParser)
 
-add_library (clte
+add_library (libclte STATIC
 	${BISON_ClteParser_OUTPUTS}
 	${FLEX_ClteScanner_OUTPUTS}
+)
+
+add_executable (clte
+	main.cpp
+	libclte
 )

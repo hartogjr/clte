@@ -24,6 +24,6 @@ add_executable (chk
 
 target_link_libraries (chk
 	${CPPUNIT_LIBRARY}
-	clte
+	libclte
 )
 
