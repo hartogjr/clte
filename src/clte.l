@@ -1,4 +1,4 @@
-/** @author  Simon de Hartog <simon@fs2a.pro>
+/** @author   Simon de Hartog <simon@fs2a.pro>
  * @copyright Fs2a Ltd. (c) 2018
  * vim:set ts=2 sw=2 noexpandtab: */
 %{
@@ -11,7 +11,10 @@
 %option noyywrap
 %option c++
 
-%%
+%% /** Rules section */
+
 %{
 	yylval = lval;
 %}
+
+%% /** C++ code section */
