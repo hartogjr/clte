@@ -7,12 +7,14 @@ There are two files needed, one data file and one template file. The data file
 should be in YAML or JSON, the template file is copied to the output file,
 recognizing the following tags:
 
-* `@#` Comment tag. Removes anything from the output until the end of the
-  line, including the newline. This means it can also be used to escape
-  newlines, like M4's `dnl`. Needs no end tags.
 * `@.` Expression end tag to denote the end of another tag containing an
   expression.
 * `@;` Block end tag to denote a block end following a conditional tag.
+* `@#` Comment tag. Removes anything from the output until the end of the
+  line, including the newline. This means it can also be used to escape
+  newlines, like M4's `dnl`. Needs no end tags.
+* `@<` Include another CLTE template file relative to this directory. No end
+  tags required. Be sure to avoid inclusion loops...
 * `@=` Output expression tag. Outputs the result of the Lua expression directly following it, until the end tag.
 * `@!` Execution tag. Execute the Lua code following this tag, but don't
   output anything directly. Needs a block end tag.
@@ -28,6 +30,8 @@ recognizing the following tags:
 * `@+` Represents value of the inner-most processing block being iterated.
 * `@++` Represents value of the second inner-most processing block being iterated.
 * `@+++` Represents value of the third inner-most processing block being iterated, etc.
+* `@@` Reduced to a single plain at-sign in the output.
+* `@` followed by anything else: Also just a plain at-sign.
 
 ## Why create *another* template engine?
 
