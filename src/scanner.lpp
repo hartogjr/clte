@@ -1,0 +1,64 @@
+/** @author   Simon de Hartog <simon@fs2a.pro>
+ * @copyright Fs2a Ltd. (c) 2018
+ * vim:set ts=4 sw=4 noexpandtab: */
+%{
+#include <string>
+%}
+
+%option debug
+%option nodefault
+%option yyclass="Clte::Parser"
+%option noyywrap
+%option c++
+
+%% /** Rules section */
+
+@\.	{
+		return EXPREND;
+	}
+
+@;	{
+		return BLOCKEND;
+	}
+
+@#	{
+		return COMMENT;
+	}
+
+@<	{
+		return INCLUDE;
+	}
+
+@=	{
+		return OUTPUT;
+	}
+
+@!	{
+		return EXEC;
+	}
+
+@\?	{
+		return IF;
+	}
+
+@:	{
+		return ELSE;
+	}
+
+@\$	{
+		return ITERATE;
+	}
+
+@^+	{
+		return KEY;
+	}
+
+@\++	{
+		return VALUE;
+	}
+
+@@	{
+		return ATSIGN;
+	}
+
+%% /** C++ code section */
