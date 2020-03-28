@@ -1,5 +1,5 @@
 /** @author   Simon de Hartog <simon@fs2a.pro>
- * @copyright Fs2a Ltd. (c) 2018
+ * @copyright Fs2a Ltd. (c) 2020
  * vim:set ts=4 sw=4 noexpandtab: */
 %{
 #include <string>

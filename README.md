@@ -35,7 +35,7 @@ recognizing the following tags:
 
 ## Why create *another* template engine?
 
-This application was create with code generation in mind for software
+This application was created with code generation in mind for software
 projects, generating C++, Slice definitions, SQL and alike. There are already
 various template engines out there. However, I've found that they don't meet
 my needs, because of the following reasons:
