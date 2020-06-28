@@ -1,8 +1,4 @@
-# @author    Simon de Hartog <simon@fs2a.pro>
-# @copyright Fs2a Ltd. (c) 2018
-# vim:set ts=2 sw=2 noexpandtab:
-
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.4)
 if(POLICY CMP0015)
   cmake_policy(SET CMP0015 NEW)
 endif()
