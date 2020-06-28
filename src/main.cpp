@@ -30,24 +30,12 @@
  *
  * vim:set ts=4 sw=4 noet: */
 
-#include <iostream>
-#include <getopt.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "Driver.h"
+#include <cstring>
+#include <boost/program_options.hpp>
+#include "Logger.h"
 
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-#include <string.h>
-
+namespace po = boost::program_options;
 using std::cerr, std::endl;
-
-const struct options opts[3] = {
-	{ "help",   no_argument,       NULL, 'h'  },
-	{ "output", required_argument, NULL, 'o'  },
-	{ NULL,     0,                 NULL, 0    }
-};
 
 void help(const char *argv0)
 {
@@ -67,13 +55,31 @@ void help(const char *argv0)
 
 int main(int argc, char *argv[])
 {
-	Clte::Driver driver;
+	size_t strp = strlen(STR(REPOROOT))+1;
+	Fs2a::Logger::instance()->stderror(strp);
+	std::string outfile;
 
-	int c;
+	try {
+		po::options_description desc("C++ & Lua Template Engine command-line interface.\nCommand-line options:");
+		desc.add_options()
+			("help,h", "Show this help message on standard error")
+			("output,o", po::value<std::string>(&outfile), "Set the output file instead of standard out")
+			("syslog,s", "Log to syslog instead of standard error")
+		;
+		po::variables_map vm;
+		po::store(po::parse_command_line(argc, argv, desc), vm);
+		po::notify(vm);
+		if (vm.count("help") {
+			cerr << desc << endl;
+			throw 0;
+		}
 
-	std::ofstream outf;
+		if (vm.count("syslog") {
+			Fs2a::Logger::instance()->syslog("clite", LOG_USER, strp);
+			LD("Logging to syslog (instead of stderror)");
+		}
 
-	do {
+/*	do {
 		switch (c = getopt_long(argc, argv, "ho:", opts, NULL)) {
 			case -1: // End of options
 				break;
@@ -113,6 +119,17 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	outfile.close();
+	outfile.close(); */
+
+	} catch (const std::exception & se) {
+		LE("Caught general exception: %s", se.what());
+		return 1;
+	} catch (const int & i) {
+		return i;
+	} catch (...) {
+		LE("Uncaught exception occurred");
+		return 1;
+	}
+
 	return 0;
 }
