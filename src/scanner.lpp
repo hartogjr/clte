@@ -54,6 +54,10 @@
 		return COMMENT;
 	}
 
+@\		{
+		return TAB;
+	}
+
 @=	{
 		return OUTPUT;
 	}
