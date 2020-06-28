@@ -18,6 +18,8 @@ recognizing the following tags:
 * `@#` Comment tag. Removes anything from the output until the end of the
   line, including the newline. This means it can also be used to escape
   newlines, like M4's `dnl`. Needs no end tags.
+* `@<Tab>` Removed from output. Used to properly indent code, but to prevent
+  cluttering the output with randomly placed tabs.
 * `@=` Output expression tag. Outputs the result of the Lua expression directly following it, until the end tag.
 * `@!` Execution tag. Execute the Lua code following this tag, but don't
   output anything directly. Needs a block end tag.
@@ -28,7 +30,7 @@ recognizing the following tags:
   from the data file. Requires both the expression end and block end tag.
 * `@^` Represents the key of the inner-most processing block being iterated.
 * `@^^` Represents the key of the second inner-most processing block being iterated.
-* `@^^^` Represents the key of the third inner-most processing block being iterated,
+* `@\^^^` Represents the key of the third inner-most processing block being iterated,
   etc.
 * `@+` Represents value of the inner-most processing block being iterated.
 * `@++` Represents value of the second inner-most processing block being iterated.
