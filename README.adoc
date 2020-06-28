@@ -18,8 +18,6 @@ recognizing the following tags:
 * `@#` Comment tag. Removes anything from the output until the end of the
   line, including the newline. This means it can also be used to escape
   newlines, like M4's `dnl`. Needs no end tags.
-* `@<` Include another CLTE template file relative to this directory. No end
-  tags required. Be sure to avoid inclusion loops...
 * `@=` Output expression tag. Outputs the result of the Lua expression directly following it, until the end tag.
 * `@!` Execution tag. Execute the Lua code following this tag, but don't
   output anything directly. Needs a block end tag.
