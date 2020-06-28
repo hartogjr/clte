@@ -1,10 +1,15 @@
-# CLTE
-C++ &amp; Lua Template Engine
+// vim:set ts=4 sw=4 noet ft=asciidoc:
+// This file is in AsciiDoc format. There are plugins for Firefox and Google
+// Chrome to automatically display a rendered version of this file when you
+// open it locally in your browser (URL starts with file:///)
+= C++ & Lua Template Engine (CLTE)
+Simon de_Hartog <simon@dehartog.name>
+:doctype: article
 
-## How does it work?
+== How does it work?
 
 There are two files needed, one data file and one template file. The data file
-should be in YAML or JSON, the template file is copied to the output file,
+should be in YAML and the template file is copied to stdout,
 recognizing the following tags:
 
 * `@.` Expression end tag to denote the end of another tag containing an
@@ -33,22 +38,25 @@ recognizing the following tags:
 * `@@` Reduced to a single plain at-sign in the output.
 * `@` followed by anything else: Also just a plain at-sign.
 
-## Why create *another* template engine?
+== Why create *another* template engine?
 
 This application was created with code generation in mind for software
 projects, generating C++, Slice definitions, SQL and alike. There are already
 various template engines out there. However, I've found that they don't meet
 my needs, because of the following reasons:
 
-* *Most of them are focussed on web applications* This means they have all
-  kinds of "smartness" for escaping HTML, which is only annoying for other
-  types of code.
-* *They use scripting languages* like Ruby, JavaScript, Python and what not.
-  When generating code, it should be fast, efficient and with a small
-  footprint in the development environment. Why bother with scripting
-  languages for a task that is relatively simple and straightforward? It is
-  again a clear choice made towards what developers are *familiar* with
-  instead of choosing the *right tool for the right job*.
-* *Processing posibilities are too simple* like in Jinja2 or the logic-less
-  Mustache. I want to have ample flexibility to write some code in my
-  templates, not be limited by what the template engine can or can't do.
+Most of them are focussed on web applications::
+This means they have all kinds of "smartness" for escaping HTML, which is only
+annoying for other types of code.
+
+They use scripting languages::
+like Ruby, JavaScript, Python and what not.  When generating code, it should
+be fast, efficient and with a small footprint in the development environment.
+Why bother with scripting languages for a task that is relatively simple and
+straightforward? It is again a clear choice made towards what developers are
+*familiar* with instead of choosing the *right tool for the right job*.
+
+Processing posibilities are too simple::
+like in Jinja2 or the logic-less Mustache. I want to have ample flexibility to
+write some code in my templates, not be limited by what the template engine
+can or can't do.
