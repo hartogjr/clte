@@ -69,8 +69,9 @@ set (CMAKE_CXX_FLAGS_DEBUG   "${CUSTOM_FLAGS} ${CUSTOM_DEBUG}")
 set (CMAKE_CXX_FLAGS_RELEASE "${CUSTOM_FLAGS} ${CUSTOM_RELEASE}")
 
 # Find necessary packages
+include (FindPkgConfig)
 find_package (Boost REQUIRED COMPONENTS program_options)
-find_package (FLEX)
+pkg_check_modules (YamlCpp REQUIRED yaml-cpp)
 
 add_subdirectory (src)
 add_subdirectory (chk)

@@ -32,19 +32,22 @@
 
 #pragma once
 
+#include <istream>
+#include <ostream>
+
 namespace Clte
 {
 
-	/** Render a template on the input stream to an output stream, using
+	/** Render a template from the input stream to the output stream, using
 	 * data to fill it. */
 	class Renderer
 	{
 		protected:
 		// Input stream to use
-		std::istream in_a;
+		std::istream * in_a;
 
 		// Output stream to use
-		std::ostream out_a;
+		std::ostream * out_a;
 
 		public:
 		// Default constructor
@@ -52,6 +55,26 @@ namespace Clte
 
 		// Default destructor
 		~Renderer();
+
+		/** Read the data to use from a file.
+		 * @param filename_i Filename to read YAML data from.
+		 * @returns True if successful, false if not. */
+		bool data(const std::string & filename_i);
+
+		/** Set the input stream to read the template from.
+		 * @param in_i Pointer to input stream.
+		 * @throws std::invalid_argument when @p in_i is NULL
+		 * @throws std::logic_error when input stream is already set */
+		void in(std::istream * in_i);
+
+		/** Set the output stream to write to.
+		 * @param out_i Pointer to output stream.
+		 * @throws std::invalid_argument when @p out_i is NULL
+		 * @throws std::logic_error when output stream is already set */
+		void out(std::istream * out_i);
+
+		/** Render the input template to the output. */
+		void render();
 
 	};
 

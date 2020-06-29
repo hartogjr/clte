@@ -30,26 +30,19 @@
 #
 # vim:set ts=4 sw=4 noet:
 
-FLEX_TARGET (ClteScanner
-	scanner.lpp
-	${CMAKE_CURRENT_BINARY_DIR}/scanner.cpp
-	COMPILE_FLAGS -+
-)
-# ADD_FLEX_BISON_DEPENDENCY (ClteScanner ClteParser)
-
-message (STATUS "Flex outs: ${FLEX_ClteScanner_OUTPUTS}")
-
 include_directories (
 	${Boost_INCLUDE_DIRS}
+	${YamlCpp_INCLUDE_DIRS}
 )
 
 add_library (clte
-	${FLEX_ClteScanner_OUTPUTS}
 	Logger.cpp
+	Renderer.cpp
 )
 
 target_link_libraries (clte
 	${Boost_LIBRARIES}
+	${YamlCpp_LIBRARIES}
 )
 
 add_executable (clite
@@ -59,4 +52,5 @@ add_executable (clite
 target_link_libraries (clite
 	clte
 	${Boost_LIBRARIES}
+	${YamlCpp_LIBRARIES}
 )

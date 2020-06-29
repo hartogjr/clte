@@ -30,12 +30,37 @@
  *
  * vim:set ts=4 sw=4 noet: */
 
+#include <stdexcept>
+#include "Logger.h"
 #include "Renderer.h"
 
 namespace Clte
 {
-	Renderer::Renderer() { }
+	Renderer::Renderer()
+	: in_a(nullptr), out_a(nullptr)
+	{ }
 
-	Renderer::~Renderer() { }
+	Renderer::~Renderer()
+	{ }
+
+	void Renderer::in(std::istream * in_i)
+	{
+		LCET(in_i != nullptr, std::invalid_argument, "Pointer to input stream may not be NULL");
+		LCET(in_a == nullptr, std::logic_error, "Input stream is already set");
+		in_a = in_i;
+	}
+
+	void Renderer::out(std::ostream * out_i)
+	{
+		LCET(out_i != nullptr, std::invalid_argument, "Pointer to output stream may not be NULL");
+		LCET(out_a == nullptr, std::logic_error, "Output stream is already set");
+		out_a = out_i;
+	}
+
+	void Renderer::render()
+	{
+		LCET(in_a != nullptr, std::logic_error, "Input stream pointer wasn't set, call in() first.");
+		LCET(out_a != nullptr, std::logic_error, "Output stream pointer wasn't set, call out() first.");
+	}
 
 } // Clte namespace
