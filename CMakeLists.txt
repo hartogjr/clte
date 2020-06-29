@@ -69,7 +69,6 @@ set (CMAKE_CXX_FLAGS_DEBUG   "${CUSTOM_FLAGS} ${CUSTOM_DEBUG}")
 set (CMAKE_CXX_FLAGS_RELEASE "${CUSTOM_FLAGS} ${CUSTOM_RELEASE}")
 
 # Find necessary packages
-find_package (BISON)
 find_package (Boost REQUIRED COMPONENTS program_options)
 find_package (FLEX)
 
