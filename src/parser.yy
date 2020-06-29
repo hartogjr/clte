@@ -30,22 +30,44 @@
  *
  * vim:set ts=4 sw=4 noet: */
 
-#include "Driver.h"
+%defines
+%define apt.token.raw
+%define apt.token.constructor
+%define api.value.type variant
+%define parse.assert
 
-namespace Clte
-{
+%code requires {
+	#include <string>
+	class Clte::Driver;
+}
 
-	Driver::Driver() { }
+// The parsing context
+%param { Clte::Driver & drv_i }
 
-	bool Driver::parse(const std::string & tplfname_i)
-	{
-		tplfname_a = tplfname_i;
-		loc_a.initialize(&tplfname_a);
-		scan_begin();
-		yy::parser prsr(*this);
-		int res = prsr();
-		scan_end();
-		return res == 0;
-	}
+// Enable location tracking
+%locations
 
-} // Clte namespace
+// Enable full debugging
+%define parse.trace
+%define parse.error detailed
+%define parse.lac full
+
+%code {
+	#include "Driver.h"
+}
+
+%define api.token.prefix {TOK_}
+%token
+	EXPEND  "@."
+	BLKEND  "@;"
+	COMMENT "@#"
+	TAB     "@\t"
+	OUTPUT  "@="
+	EXEC    "@!"
+	IF      "@?"
+	ELSE    "@:"
+	ITERATE "@$"
+	ATSIGN  "@@"
+;
+
+%printer { yyo << $$; } <*>;

@@ -32,16 +32,43 @@
 
 #pragma once
 
+#include <string>
+
+#define YY_DECL \
+	yy::parser::symbol_type yylex(Clte::Driver & drv_i)
+
+YY_DECL;
+
 namespace Clte
 {
 
 	class Driver
 	{
 		protected:
+		// Token location
+		yy::location loc_a;
+
+		// Template filename we are reading
+		std::string tplfname_a;
 
 		public:
+		// Default constructor
 		Driver();
+
+		// Default destructor
 		~Driver();
+
+		/** Parse a template input file
+		 * @param tplfname_i Template filename, default is "", meaning stdin
+		 * @returns True if successful, false if a failure occurred. */
+		bool parse(const std::string & tplfname_i = "");
+
+		/** Handle the start of scanning. */
+		virtual inline void scan_begin() { }
+
+		/** Handle the end of scanning. */
+		virtual inline void scan_end() { }
+
 	};
 
-} // CLTE namespace
+} // Clte namespace
